@@ -24,6 +24,7 @@ model Task {
     endDate     DateTime?
     User        User?     @relation(fields: [userId], references: [id])
     userId      String?
+    status      String
 }
 
 // Necessary for Next auth

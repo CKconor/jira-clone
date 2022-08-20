@@ -1,15 +1,21 @@
 import { createRouter } from "./context";
 import { z } from "zod";
 
-export const exampleRouter = createRouter().query("hello", {
+export const exampleRouter = createRouter().query("tasks", {
   input: z
     .object({
-      text: z.string().nullish(),
+      userId: z.string().nullable(),
     })
-    .nullish(),
-  resolve({ input }) {
-    return {
-      greeting: `Hello ${input?.text ?? "world"}`,
-    };
+    .nullable(),
+  async resolve({ ctx, input }) {
+    if (input) {
+      const id = input.userId;
+      const tasks = await ctx.prisma.task.findMany({
+        where: {
+          userId: id,
+        },
+      });
+      return tasks;
+    }
   },
 });
