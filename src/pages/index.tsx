@@ -11,8 +11,12 @@ const Home: NextPage = () => {
 
   const { data, isLoading } = trpc.useQuery([
     "example.tasks",
-    { userId: user || "" },
+    { userId: user || null },
   ]);
+
+  console.log(data);
+
+  if (isLoading) return <p>Loading...</p>;
 
   if (session) {
     return (
