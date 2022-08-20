@@ -1,8 +1,6 @@
 import type { NextPage } from "next";
-import Head from "next/head";
 import { trpc } from "../utils/trpc";
 import { useSession, signIn, signOut } from "next-auth/react";
-import LandingPage from "./LandingPage";
 
 const Home: NextPage = () => {
   const { data: session } = useSession();
