@@ -1,20 +1,15 @@
 import type { NextPage } from "next";
 
-import { useSession, signIn } from "next-auth/react";
+import { useSession } from "next-auth/react";
 import LandingPage from "./LandingPage";
+import LoginPage from "./LoginPage";
 
 const Home: NextPage = () => {
   const { data: session } = useSession();
-
-  if (session) {
+  if (session?.user) {
     return <LandingPage />;
   }
-  return (
-    <>
-      <p>Please Login</p>
-      <button onClick={() => signIn()}>Sign In</button>
-    </>
-  );
+  return <LoginPage />;
 };
 
 export default Home;
